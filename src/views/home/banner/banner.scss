@@ -1,0 +1,102 @@
+@import "@/assets/css/base.scss";
+.banner-content {
+    overflow: auto;
+    font-size: $FontSize25;
+    // tab 标签页
+    .banner-tab {
+        position: fixed;
+        margin-top: 10px;
+        width: 100%;
+        font-size: $FontSize35;
+        .van-tabs {
+            .van-tabs__wrap {
+                height: 60px;
+                margin-right: 100px;
+                .van-tabs__nav {
+                    border: 0;
+                    .van-tab {
+                        flex-basis: 18% !important;
+                        span {
+                            font-size: 25px;
+                        }
+                    }
+                    .van-tab--active {
+                        span {
+                            color: #EC643E;
+                        }
+                    }
+                }
+            }
+        }
+        // 按钮
+        .tabOpen {
+            z-index: 10;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 80px;
+            height: 60px;
+            background-color: $Color_fff;
+            line-height: 60px;
+            text-align: center;
+            &::after {
+                content: "";
+                position: absolute;
+                left: -30px;
+                width: 30px;
+                height: 60px;
+                background-color: $Color_fff;
+                opacity: 0.8;
+            }
+        }
+        // 隐藏的盒子 
+        .tabAllCard-box {
+            position: absolute;
+            top: 0;
+            background-color: $Color_fff;
+            width: 100%;
+            .title {
+                font-size: $FontSize25;
+                margin-top: 10px;
+                padding: 0 20px;
+            }
+            .tag-box {
+                margin-top: 40px;
+                padding: 0 10px;
+                margin-bottom: 20px;
+                span {
+                    font-size: $FontSize25;
+                    padding: 0;
+                    width: 150px;
+                    text-align: center;
+                    height: 60px;
+                    line-height: 60px;
+                    border: 1px solid #E9E9E9;
+                    border-radius: 10px;
+                    margin: 20px 10px;
+                    color: #000;
+                    &::after {
+                        border: 0;
+                    }
+                }
+                .active {
+                    border: 1px solid #FEB78B;
+                    color: #FF5800;
+                    background-color: #FDE0D5;
+                }
+            }
+            // 遮盖层
+            .Overlay-box {
+                position: fixed;
+                height: 100%;
+                width: 100%;
+                background-color: #999999;
+            }
+        }
+        
+    }
+    // 轮播图
+    .slideshow-box {
+
+    }
+}

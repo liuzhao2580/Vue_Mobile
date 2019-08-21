@@ -6,7 +6,7 @@
         </div>
         <!-- 输入框 -->
         <div class="search-input">
-            <input type="text" placeholder="请输入关键字" @focus="searchInputFocus" />
+            <input type="text" v-model="searchInputValue" @focus="searchInputFocus" />
             <div class="search-icon">
                 <i class="iconfont icon-sousuo-copy"></i>
             </div>
@@ -14,7 +14,7 @@
         <!-- 扫码 -->
         <div class="search-saoma" @click="saomaBtn">
             <i class="iconfont icon-scancode"></i>
-            <!-- <input type="file" hidden> -->
+            <!-- <input type="file" accept="image/*" capture="camera" @change="saomaBtn"> -->
         </div>
 
         <!-- 消息弹出框 -->
@@ -93,6 +93,8 @@ export default {
     props: {},
     data() {
         return {
+            // 输入框
+            searchInputValue: "液晶小电视",
             // 消息弹出框
             searchInfoPopup: false,
             /** 点击交易物流或者服务通知卡片 */
@@ -150,7 +152,7 @@ export default {
 
         /** 扫码 */
         saomaBtn() {
-            console.log(window.plus)
+            // alert(window.plus)
         }
         /** 扫码 */
     },

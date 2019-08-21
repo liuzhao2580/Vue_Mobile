@@ -4,6 +4,10 @@
         <div class="search-box">
             <search></search>
         </div>
+        <!-- banner 包含轮播图和 分类选项-->
+        <div class="banner-box">
+            <banner></banner>
+        </div>
     </div>
 </template>
 
@@ -13,7 +17,8 @@ import { getIndex } from "@/api/index";
 export default {
     name: "home",
     components: {
-        search: () => import("./search/search.vue")
+        search: () => import("./search/search.vue"),
+        banner: () => import("./banner/banner")
     },
     props: {},
     data() {
