@@ -33,7 +33,7 @@ export default {
     },
     created() {
         recommend_sildershow().then(({data}) => {
-            this.images = data.data.banner.url
+            this.images = data.banner.url
         })
     },
     mounted() {},
