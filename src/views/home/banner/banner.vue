@@ -2,9 +2,9 @@
     <div class="banner-content">
         <!-- tab 标签页 -->
         <div class="banner-tab">
-            <van-tabs v-show="tabCardShow" @click="vanTabsClick" v-model="selectValue">
-                <van-tab v-for="item in bannerTabCard" :title="item.title" :key="item.title">
-                    <van-pull-refresh v-model="refreshLoading" @refresh="onRefresh">
+            <van-tabs v-show="tabCardShow" @click="vanTabsClick" v-model="selectValue" swipeable animated>
+                <van-tab v-for="item in bannerTabCard" :title="item.title" :key="item.title" >
+                    <van-pull-refresh v-model="refreshLoading" @refresh="onRefresh" :head-height="100">
                         <recommend v-if="item.title == '推荐'"></recommend>
                     </van-pull-refresh>
                 </van-tab>
@@ -120,7 +120,6 @@ export default {
         // 下拉刷新
         onRefresh() {
             setTimeout(() => {
-                this.$toast("刷新成功");
                 this.refreshLoading = false;
             }, 500);
         }
