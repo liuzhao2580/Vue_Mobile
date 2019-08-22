@@ -58,10 +58,12 @@ export default {
 @import "@/assets/css/base.scss";
 .Home-box {
     .bottomNav {
-        position: absolute;
+        position: fixed;
+        background-color: $Color_fff;
         bottom: 0;
         width: 100%;
         text-align: center;
+        z-index: 9999;
         .bottomNav-box {
             display: flex;
             .bottomNav-li {

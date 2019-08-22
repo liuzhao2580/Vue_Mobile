@@ -1,5 +1,6 @@
 @import "@/assets/css/base.scss";
 .recommend-box {
+    background-color: $Color_F5F5F5;
     // 轮播图
     .recommend-slideshow {
         height: 350px;
@@ -19,6 +20,7 @@
     }
     // 分类标签
     .recommend-classify {
+        background-color: $Color_fff;
         .classify-ul {
             display: flex;
             flex-wrap: wrap;
@@ -39,5 +41,53 @@
                 }
             }
         }
+    }
+    // 商城早报
+    .recommend-storeNews {
+        background-color: $Color_fff;
+        border-top: 1px solid #E3E3E3;
+        padding: 0 20px;
+        padding-top: 10px;
+        display: flex;
+        height: 60px;
+        .title {
+            width: 20%;
+            color: $Color_F25C2C;
+            font-size: $FontSize25;
+            line-height: 60px;
+            text-align: center;
+            position: relative;
+            &::after {
+                content: "";
+                z-index: 2;
+                position: absolute;
+                right: -10px;
+                top: 15px;
+                width: 2px;
+                height: 50px;
+                background-color: #CDCDCD;
+            }
+        }
+        .content {
+            width: 70%;
+            .content-ul {
+                height: 60px;
+                .van-swipe__track {
+                    .item-li {
+                        height: 100%;
+                        font-size: $FontSize25;
+                        padding-left: 40px;
+                        line-height: 60px;
+                        color: #000000;
+                        background-color: $Color_fff;
+                    }
+                }   
+                
+            }
+        }
+    }
+    // 商城下面的图片
+    .recommend-storeNewsImages {
+        
     }
 }
