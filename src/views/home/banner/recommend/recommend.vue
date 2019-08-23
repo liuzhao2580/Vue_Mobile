@@ -76,13 +76,27 @@
                 <div class="store-content">
                     <div v-for="(item,index) in miaoshaStore" :key="index" class="store-box">
                         <div class="item-img">
-                            <van-image lazy-load :src="item.url" />
+                            <img v-lazy="item.url" />
                         </div>
                         <div class="item-price">
                             <span class="price-new">¥{{item.nowPrice}}</span>
                             <span class="price-old">¥{{item.oldPrice}}</span>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+        <!-- 秒杀下面的图片 -->
+        <div class="recommend-image-box">
+            <img v-lazy="miaoshaImage.url">
+        </div>
+        <!-- 小米众筹 -->
+        <div class="recommend-zhonchou">
+            <div class="title">
+                <h2>小米众筹</h2>
+                <div class="more">
+                    <span>更多</span>
+                    <van-icon name="arrow" />
                 </div>
             </div>
         </div>
@@ -118,7 +132,9 @@ export default {
             countDownSecond0: "",
             countDownSecond: "",
             // 商品
-            miaoshaStore: []
+            miaoshaStore: [],
+            // 秒杀下面的图片
+            miaoshaImage: []
             /** 秒杀 */
         };
     },
@@ -126,7 +142,6 @@ export default {
         this.init();
     },
     mounted() {
-        this.scroll()
     },
     methods: {
         // 初始化 调用接口
@@ -144,6 +159,8 @@ export default {
                 this.storeNewsImages = data.storeNewsImages;
                 // 秒杀商品
                 this.miaoshaStore = data.miaosha;
+                // 秒杀下面的图片
+                this.miaoshaImage = data.miaoshaImage
             });
         },
         // classify 的点击点击事件
