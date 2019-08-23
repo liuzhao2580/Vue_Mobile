@@ -1,28 +1,37 @@
 @import "@/assets/css/base.scss";
+
 .banner-content {
     overflow: auto;
     font-size: $FontSize25;
+
     // tab 标签页
     .banner-tab {
         margin-top: 10px;
         width: 100%;
         font-size: $FontSize35;
+
         .van-tabs {
             overflow: hidden;
+            position: inherit;
+
             .van-tabs__wrap {
                 position: fixed;
                 width: 100%;
                 height: 60px;
                 margin-right: 100px;
                 z-index: 9999;
+
                 .van-tabs__nav {
                     border: 0;
+
                     .van-tab {
                         flex-basis: 18% !important;
+
                         span {
                             font-size: 25px;
                         }
                     }
+
                     .van-tab--active {
                         span {
                             color: #EC643E;
@@ -30,21 +39,35 @@
                     }
                 }
             }
+
             .van-tabs__content {
-                margin-top: 65px;
+                position: absolute;
+                width: 100%;
+                top: 65px;
+                bottom: 0;
+
+                .van-tab__pane {
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    width: 100%;
+                    overflow: scroll;
+                }
             }
         }
+
         // 按钮
         .tabOpen {
-            z-index: 10;
+            z-index: 99999;
             position: absolute;
             right: 0;
             top: 0;
             width: 80px;
-            height: 60px;
+            height: 70px;
             background-color: $Color_fff;
-            line-height: 60px;
+            line-height: 70px;
             text-align: center;
+
             &::after {
                 content: "";
                 position: absolute;
@@ -55,21 +78,26 @@
                 opacity: 0.8;
             }
         }
+
         // 隐藏的盒子 
         .tabAllCard-box {
+            z-index: 9999;
             position: absolute;
-            top: 0;
+            top: 10px;
             background-color: $Color_fff;
             width: 100%;
+
             .title {
                 font-size: $FontSize25;
                 margin-top: 10px;
                 padding: 0 20px;
             }
+
             .tag-box {
                 margin-top: 40px;
                 padding: 0 10px;
                 margin-bottom: 20px;
+
                 span {
                     font-size: $FontSize25;
                     padding: 0;
@@ -81,28 +109,32 @@
                     border-radius: 10px;
                     margin: 20px 10px;
                     color: #000;
+
                     &::after {
                         border: 0;
                     }
                 }
+
                 .active {
                     border: 1px solid #FEB78B;
                     color: #FF5800;
                     background-color: #FDE0D5;
                 }
             }
+
             // 遮盖层
             .Overlay-box {
+                z-index: 99999;
                 position: fixed;
                 height: 100%;
                 width: 100%;
                 background-color: #999999;
+                // opacity: 0.6;
             }
         }
-        
-    }
-    // 轮播图
-    .slideshow-box {
 
     }
+
+    // 轮播图
+    .slideshow-box {}
 }

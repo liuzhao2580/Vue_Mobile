@@ -1,6 +1,10 @@
 @import "@/assets/css/base.scss";
 .home-box {
     overflow: hidden;
+    position: absolute;
+    top: 0;
+    bottom: $HeightBottomNav;
+    width: 100%;
     // 固定的搜索框
     .search-box {
         height: $HeightSearch;
@@ -11,7 +15,10 @@
     }
     // banner 包含轮播图和 分类选项
     .banner-box {
-        height: 100%;
-        margin-top: 80px;
+        position: absolute;
+        top: 80px;
+        width: 100%;
+        bottom: 0;
+        overflow: scroll;
     }
 }

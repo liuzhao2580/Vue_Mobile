@@ -2,9 +2,14 @@
     <div class="banner-content">
         <!-- tab 标签页 -->
         <div class="banner-tab">
-            <van-tabs v-show="tabCardShow" @click="vanTabsClick" v-model="selectValue" swipeable animated>
-                <van-tab v-for="item in bannerTabCard" :title="item.title" :key="item.title" >
-                    <van-pull-refresh v-model="refreshLoading" @refresh="onRefresh" :head-height="100">
+            <van-tabs
+                @click="vanTabsClick"
+                v-model="selectValue"
+                swipeable
+                animated
+            >
+                <van-tab v-for="item in bannerTabCard" :title="item.title" :key="item.title">
+                    <van-pull-refresh v-model="refreshLoading" @refresh="onRefresh" :head-height="80">
                         <recommend v-if="item.title == '推荐'"></recommend>
                     </van-pull-refresh>
                 </van-tab>

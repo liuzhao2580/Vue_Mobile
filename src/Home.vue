@@ -59,6 +59,7 @@ export default {
 .Home-box {
     .bottomNav {
         position: fixed;
+        height: $HeightBottomNav;
         background-color: $Color_fff;
         bottom: 0;
         width: 100%;
