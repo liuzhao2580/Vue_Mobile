@@ -5,12 +5,12 @@
             <van-tabs
                 @click="vanTabsClick"
                 v-model="selectValue"
-                swipeable
                 animated
+                :swipeable="tabs_swipeable"
             >
                 <van-tab v-for="item in bannerTabCard" :title="item.title" :key="item.title">
                     <van-pull-refresh v-model="refreshLoading" @refresh="onRefresh" :head-height="80">
-                        <recommend v-if="item.title == '推荐'"></recommend>
+                        <recommend v-if="item.title == '推荐'" @swipeableFun="swipeableFlag"></recommend>
                     </van-pull-refresh>
                 </van-tab>
             </van-tabs>
@@ -79,6 +79,7 @@ export default {
             ],
             // 选中的当前的标签
             selectValue: 0,
+            tabs_swipeable: true,
             /** tab 标签页 */
             // 按钮
             tabBtnIcon: "arrow-down",
@@ -127,6 +128,10 @@ export default {
             setTimeout(() => {
                 this.refreshLoading = false;
             }, 500);
+        },
+        // 接受子组件传递的参数
+        swipeableFlag(flag) {
+            this.tabs_swipeable = flag
         }
     },
     watch: {}

@@ -4,6 +4,10 @@ import router from './router'
 import store from './store'
 import './registerServiceWorker'
 import 'lib-flexible/flexible.js'
+// 引入moment
+import moment from 'moment'
+Vue.prototype.$moment = moment
+
 // 引入 Vant 组件
 import Vant from 'vant';
 import 'vant/lib/index.css';

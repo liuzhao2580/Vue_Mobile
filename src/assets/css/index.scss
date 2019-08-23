@@ -11,7 +11,22 @@
     span {
         font-size: $FontSize25;
     }
+
     .van-pull-refresh__text {
         font-size: $FontSize25;
     }
+}
+
+// 清除浮动
+.clearfix::after {
+    content: ".";
+    clear: both;
+    display: block;
+    overflow: hidden;
+    font-size: 0;
+    height: 0;
+}
+
+.clearfix {
+    zoom: 1;
 }
