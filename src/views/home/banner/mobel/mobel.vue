@@ -2,6 +2,16 @@
     <div class="mobel-box">
          <!-- SlideShowBox 包含轮播图 和 分类  -->
         <SlideShowBox :SlideShowBox="SlideShowBox_Tran"></SlideShowBox>
+        <!-- 推荐商品 -->
+        <div class="mobel-recommend">
+            <div class="img">
+                <img v-lazy="img">
+            </div>
+            <div class="title-descripe">
+                <div class="text-left"></div>
+                <div class="text-right"></div>
+            </div>  
+        </div>
     </div>
 </template>
 
