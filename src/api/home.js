@@ -13,3 +13,9 @@ export const recommend_sildershow = () => {
     return axios.get(`${baseURL}/recommend`)
 }
 /** tab 切换中的推荐项 */
+
+/** tab 切换中的手机项 */
+export const mobel_sildershow = () => {
+    return axios.get(`${baseURL}/mobel`)
+}
+/** tab 切换中的手机项 */

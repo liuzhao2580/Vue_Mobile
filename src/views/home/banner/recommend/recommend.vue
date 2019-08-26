@@ -1,29 +1,7 @@
 <template>
     <div class="recommend-box">
-        <!-- 轮播图 -->
-        <div class="recommend-slideshow">
-            <van-swipe :autoplay="3000">
-                <van-swipe-item v-for="(image, index) in images" :key="index">
-                    <img v-lazy="image" />
-                </van-swipe-item>
-            </van-swipe>
-        </div>
-        <!-- 分类标签 -->
-        <div class="recommend-classify">
-            <ul class="classify-ul">
-                <li
-                    v-for="item in classifyCard"
-                    :key="item.title"
-                    class="item-li"
-                    @click="classify_liClick(item.title)"
-                >
-                    <div class="item-img">
-                        <img :src="item.url" />
-                    </div>
-                    <p class="item-span">{{item.title}}</p>
-                </li>
-            </ul>
-        </div>
+        <!-- SlideShowBox 包含轮播图 和 分类  -->
+        <SlideShowBox :SlideShowBox="SlideShowBox_Tran"></SlideShowBox>
         <!-- 商城早报 -->
         <div class="recommend-storeNews">
             <p class="title">商城早报</p>
@@ -112,14 +90,21 @@ Vue.use(Lazyload);
 import { recommend_sildershow } from "@/api/home";
 export default {
     name: "recommend",
-    components: {},
+    components: {
+        // 引入 SlideShowBox 组件
+        SlideShowBox: () => import("@/components/SlideShowBox/SlideShowBox")
+    },
     props: {},
     data() {
         return {
-            // 轮播图
-            images: [],
-            // 分类 card
-            classifyCard: [],
+            /** 传递 SlideShowBox 组件 */
+            SlideShowBox_Tran: {
+                // 轮播图
+                images: [],
+                // 分类 card
+                classifyCard: [],
+            },
+            /** 传递 SlideShowBox 组件 */
             // 商城早报
             storeNews: [],
             // 商城下面的图片
@@ -150,9 +135,9 @@ export default {
             recommend_sildershow().then(({ data }) => {
                 console.log(data);
                 // 获取轮播图的地址
-                this.images = data.banner.url;
+                this.SlideShowBox_Tran.images = data.banner.url;
                 // 分类 card
-                this.classifyCard = data.classify;
+                this.SlideShowBox_Tran.classifyCard = data.classify;
                 // 商城早报
                 this.storeNews = data.storeNews;
                 // 商城下面的图片
@@ -162,10 +147,6 @@ export default {
                 // 秒杀下面的图片
                 this.miaoshaImage = data.miaoshaImage
             });
-        },
-        // classify 的点击点击事件
-        classify_liClick(title) {
-            console.log(title);
         },
         // 点场 title
         getTime_title() {

@@ -1,0 +1,54 @@
+@import "@/assets/css/base.scss";
+
+.SlideShowBox-box {
+    // 轮播图
+    .SlideShowBox-slideshow {
+        height: $HeightSlideshow;
+
+        .van-swipe {
+            height: 100%;
+
+            img {
+                width: 100%;
+                height: 100%;
+            }
+
+            .van-swipe__indicators {
+                i {
+                    width: 10px;
+                    height: 10px;
+                }
+            }
+        }
+    }
+
+    // 分类标签
+    .SlideShowBox-classify {
+        background-color: $Color_fff;
+
+        .classify-ul {
+            display: flex;
+            flex-wrap: wrap;
+
+            .item-li {
+                width: 20%;
+                margin: 20px 0;
+
+                .item-img {
+                    width: 100%;
+                    height: 80px;
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+
+                .item-span {
+                    font-size: $FontSize20;
+                    text-align: center;
+                }
+            }
+        }
+    }
+}

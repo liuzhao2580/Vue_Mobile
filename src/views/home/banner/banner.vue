@@ -11,6 +11,7 @@
                 <van-tab v-for="item in bannerTabCard" :title="item.title" :key="item.title">
                     <van-pull-refresh v-model="refreshLoading" @refresh="onRefresh" :head-height="80">
                         <recommend v-if="item.title == '推荐'" @swipeableFun="swipeableFlag"></recommend>
+                        <mobel v-else-if="item.title == '手机'"></mobel>
                     </van-pull-refresh>
                 </van-tab>
             </van-tabs>
@@ -45,10 +46,12 @@
 
 <script>
 import "./banner.scss";
+import { recommend_sildershow } from "@/api/home";
 export default {
     name: "banner",
     components: {
-        recommend: () => import("./recommend/recommend")
+        recommend: () => import("./recommend/recommend"),
+        mobel: () => import("./mobel/mobel")
     },
     props: {},
     data() {
@@ -125,9 +128,9 @@ export default {
         },
         // 下拉刷新
         onRefresh() {
-            setTimeout(() => {
+            recommend_sildershow().then(() => {
                 this.refreshLoading = false;
-            }, 500);
+            })
         },
         // 接受子组件传递的参数
         swipeableFlag(flag) {
