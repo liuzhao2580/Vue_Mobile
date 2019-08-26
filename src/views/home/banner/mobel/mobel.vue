@@ -5,12 +5,30 @@
         <!-- 推荐商品 -->
         <div class="mobel-recommend">
             <div class="img">
-                <img v-lazy="img">
+                <img v-lazy="mobelRecommend.img">
             </div>
             <div class="title-descripe">
-                <div class="text-left"></div>
-                <div class="text-right"></div>
-            </div>  
+                <div class="text-left">
+                    <p>{{mobelRecommend.text_header}}</p>
+                    <p>{{mobelRecommend.text_content}}</p>
+                </div>
+                <div class="text-right">
+                    <div class="price">
+                        <span>
+                            <i>¥</i>
+                            <em>
+                                {{mobelRecommend.now_price}}
+                            </em>
+                            <i>起</i>
+                        </span>
+                        <span>
+                            <i>¥</i>
+                            {{mobelRecommend.old_price}}
+                        </span>
+                    </div>
+                    <van-button type="danger">立即购买</van-button>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -35,6 +53,8 @@ export default {
                 classifyCard: [],
             },
             /** 传递 SlideShowBox 组件 */
+            // 推荐商品
+            mobelRecommend: {},
         };
     },
     created() {
@@ -50,6 +70,8 @@ export default {
                 this.SlideShowBox_Tran.images = data.banner.url;
                 // 分类 card
                 this.SlideShowBox_Tran.classifyCard = data.classify;
+                // 推荐商品
+                this.mobelRecommend = data.recommend
             })
         }
     },
