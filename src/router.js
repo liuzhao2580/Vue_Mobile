@@ -14,6 +14,9 @@ export default new Router({
         {
             path: "/",
             component: Home,
+            meta: {
+                keepAlive: true, //此组件需要被缓存
+            },
             children: [
                 {
                     path: "/home",
@@ -26,11 +29,17 @@ export default new Router({
         {
             path: "/detail",
             name: "detail",
+            meta: {
+                keepAlive: false, //此组件需要被缓存
+            },
             component: () => import(/* webpackChunkName: "detail" */ '@/views/home/search/detail/detail.vue')
         },
         {
             path: "/",
             component: Home,
+            meta: {
+                keepAlive: true, //此组件需要被缓存
+            },
             children: [
                 {
                     path: '/shop',
@@ -42,6 +51,9 @@ export default new Router({
         {
             path: "/",
             component: Home,
+            meta: {
+                keepAlive: true, //此组件需要被缓存
+            },
             children: [
                 {
                     path: '/shopcar',
@@ -53,6 +65,9 @@ export default new Router({
         {
             path: "/",
             component: Home,
+            meta: {
+                keepAlive: true, //此组件需要被缓存
+            },
             children: [
                 {
                     path: '/mine',
@@ -60,6 +75,15 @@ export default new Router({
                     component: () => import(/* webpackChunkName: "mine" */ '@/views/mine/mine.vue')
                 }
             ]
-        }
+        },
+        // 商品详情
+        {
+            path: "/goodsDetail",
+            name: "goodsDetail",
+            meta: {
+                keepAlive: true, //此组件需要被缓存
+            },
+            component: () => import(/* webpackChunkName: "goodsDetail" */ '@/views/goodsDetail/goodsDetail.vue')
+        },
     ]
 })

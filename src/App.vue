@@ -1,15 +1,19 @@
 <template>
     <div id="app">
-        <router-view />
+        <keep-alive>
+            <router-view></router-view>
+        </keep-alive>
+        <!-- <router-view v-if="!$route.meta.keepAlive"></router-view> -->
     </div>
 </template>
 
 <script>
 export default {
     data() {
-        return {
-            
-        };
+        return {};
+    },
+    created () {
+        console.log(this.$route.meta)
     }
 };
 </script>

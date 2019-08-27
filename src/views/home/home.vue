@@ -4,7 +4,7 @@
         <div class="search-box">
             <search></search>
         </div>
-        <!-- banner 包含轮播图和 分类选项-->
+        <!-- banner 包含轮播图 和 分类选项-->
         <div class="banner-box">
             <banner></banner>
         </div>

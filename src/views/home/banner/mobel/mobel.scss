@@ -78,4 +78,70 @@
             }
         }
     }
+    // 商品
+    .mobel-goods {
+        margin-top: 10px;
+        padding: 0 10px;
+        .goods-ul {
+            display: flex;
+            flex-flow: wrap;
+            text-align: center;
+            justify-content: space-between;
+            .item-li {
+                width: 49%;
+                background-color: $Color_fff;
+                color: #000;
+                margin-bottom: 10px;
+                .item-img{
+                    width: 100%;
+                    height: 300px;
+                    margin-bottom: 40px;
+                    img {
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+                .item-title {
+                    font-size: $FontSize25;
+                }
+                .item-introduce {
+                    font-size: $FontSize20;
+                    margin: 10px 0;
+                }
+                .item-price {
+                    .new-price,
+                    .old-price {
+                        display: inline-block;
+                        color: $Color_EA625B;
+                        i {
+                            font-size: $FontSize20;
+                        }
+                        em {
+                            font-size: $FontSize30;
+                            margin-right: 5px;
+                        }
+                    }
+                    .old-price {
+                        margin-left: 10px;
+                        color: $Color_ccc;
+                        text-decoration: line-through;
+                        em {
+                            font-size: $FontSize20;
+                        }
+                    }
+                }
+                .item-button {
+                    margin-top: 10px;
+                    margin-bottom: 40px;
+                    .van-button {
+                        padding: 0 40px;
+                        height: 60px;
+                        background-color: $Color_EA625B;
+                        font-size: $FontSize25;
+                        color: $Color_fff;
+                    }
+                }
+            }
+        }
+    }
 }

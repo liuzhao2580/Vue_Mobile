@@ -8,11 +8,13 @@
                 animated
                 :swipeable="tabs_swipeable"
             >
-                <van-tab v-for="item in bannerTabCard" :title="item.title" :key="item.title">
-                    <van-pull-refresh v-model="refreshLoading" @refresh="onRefresh" :head-height="80">
-                        <recommend v-if="item.title == '推荐'" @swipeableFun="swipeableFlag"></recommend>
-                        <mobel v-else-if="item.title == '手机'"></mobel>
-                    </van-pull-refresh>
+                <van-tab
+                    v-for="item in bannerTabCard"
+                    :title="item.title"
+                    :key="item.title"
+                >
+                    <recommend v-if="item.title == '推荐'" @swipeableFun="swipeableFlag"></recommend>
+                    <mobel v-else-if="item.title == '手机'"></mobel>
                 </van-tab>
             </van-tabs>
             <!-- 按钮 -->
@@ -99,7 +101,8 @@ export default {
     created() {
         this.init();
     },
-    mounted() {},
+    mounted() {
+    },
     methods: {
         // 初始化
         init() {
@@ -130,11 +133,11 @@ export default {
         onRefresh() {
             recommend_sildershow().then(() => {
                 this.refreshLoading = false;
-            })
+            });
         },
         // 接受子组件传递的参数
         swipeableFlag(flag) {
-            this.tabs_swipeable = flag
+            this.tabs_swipeable = flag;
         }
     },
     watch: {}

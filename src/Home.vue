@@ -1,6 +1,8 @@
 <template>
     <div class="Home-box">
-        <router-view />
+        <keep-alive>
+            <router-view />
+        </keep-alive>
         <div class="bottomNav">
             <ul class="bottomNav-box">
                 <li v-for="item in bottomNavData" :key="item.name" class="bottomNav-li">

@@ -1,80 +1,82 @@
 <template>
-    <div class="recommend-box">
-        <!-- SlideShowBox 包含轮播图 和 分类  -->
-        <SlideShowBox :SlideShowBox="SlideShowBox_Tran"></SlideShowBox>
-        <!-- 商城早报 -->
-        <div class="recommend-storeNews">
-            <p class="title">商城早报</p>
-            <div class="content">
-                <van-swipe
-                    class="content-ul"
-                    vertical
-                    :show-indicators="false"
-                    :autoplay="3000"
-                    :touchable="false"
-                >
-                    <van-swipe-item
-                        v-for="item in storeNews"
-                        :key="item"
-                        class="item-li van-ellipsis"
-                    >{{item}}</van-swipe-item>
-                </van-swipe>
+    <div class="recommend" style="height: 100%" ref="recommendRef">
+        <div class="recommend-box">
+            <!-- SlideShowBox 包含轮播图 和 分类  -->
+            <SlideShowBox :SlideShowBox="SlideShowBox_Tran"></SlideShowBox>
+            <!-- 商城早报 -->
+            <div class="recommend-storeNews">
+                <p class="title">商城早报</p>
+                <div class="content">
+                    <van-swipe
+                        class="content-ul"
+                        vertical
+                        :show-indicators="false"
+                        :autoplay="3000"
+                        :touchable="false"
+                    >
+                        <van-swipe-item
+                            v-for="item in storeNews"
+                            :key="item"
+                            class="item-li van-ellipsis"
+                        >{{item}}</van-swipe-item>
+                    </van-swipe>
+                </div>
             </div>
-        </div>
-        <!-- 商城下面的图片 -->
-        <div class="recommend-storeNewsImages clearfix">
-            <template v-for="(item,index) in storeNewsImages">
-                <div v-if="item.pos == 'left'" class="img-left" :key="index">
-                    <img :src="item.img" alt />
-                </div>
-                <div v-else-if="item.pos == 'right'" class="img-right" :key="index">
-                    <img v-for="item1 in item.children" :src="item1.img" alt :key="item1.img" />
-                </div>
-                <div v-else-if="item.pos == 'bottom'" class="img-bottom" :key="index">
-                    <img :src="item.img" alt />
-                </div>
-            </template>
-        </div>
-        <!-- 秒杀 -->
-        <div class="recommend-miaosha">
-            <div class="title">
-                <h2>小米秒杀</h2>
-                <div class="time">
-                    <div class="time-title">{{Time_title}}点场</div>
-                    <div class="time-countdown">
-                        <span>{{countDownHours0}}{{countDownHours}}</span>
-                        <i>:</i>
-                        <span>{{countDownMinute0}}{{countDownMinute}}</span>
-                        <i>:</i>
-                        <span>{{countDownSecond0}}{{countDownSecond}}</span>
+            <!-- 商城下面的图片 -->
+            <div class="recommend-storeNewsImages clearfix">
+                <template v-for="(item,index) in storeNewsImages">
+                    <div v-if="item.pos == 'left'" class="img-left" :key="index">
+                        <img :src="item.img" alt />
                     </div>
-                </div>
+                    <div v-else-if="item.pos == 'right'" class="img-right" :key="index">
+                        <img v-for="item1 in item.children" :src="item1.img" alt :key="item1.img" />
+                    </div>
+                    <div v-else-if="item.pos == 'bottom'" class="img-bottom" :key="index">
+                        <img :src="item.img" alt />
+                    </div>
+                </template>
             </div>
-            <div class="store" ref="storeRef" @touchstart="touchstart" @touchend="touchend">
-                <div class="store-content">
-                    <div v-for="(item,index) in miaoshaStore" :key="index" class="store-box">
-                        <div class="item-img">
-                            <img v-lazy="item.url" />
-                        </div>
-                        <div class="item-price">
-                            <span class="price-new">¥{{item.nowPrice}}</span>
-                            <span class="price-old">¥{{item.oldPrice}}</span>
+            <!-- 秒杀 -->
+            <div class="recommend-miaosha">
+                <div class="title">
+                    <h2>小米秒杀</h2>
+                    <div class="time">
+                        <div class="time-title">{{Time_title}}点场</div>
+                        <div class="time-countdown">
+                            <span>{{countDownHours0}}{{countDownHours}}</span>
+                            <i>:</i>
+                            <span>{{countDownMinute0}}{{countDownMinute}}</span>
+                            <i>:</i>
+                            <span>{{countDownSecond0}}{{countDownSecond}}</span>
                         </div>
                     </div>
                 </div>
+                <div class="store" ref="storeRef" @touchstart="touchstart" @touchend="touchend">
+                    <div class="store-content">
+                        <div v-for="(item,index) in miaoshaStore" :key="index" class="store-box">
+                            <div class="item-img">
+                                <img v-lazy="item.url" />
+                            </div>
+                            <div class="item-price">
+                                <span class="price-new">¥{{item.nowPrice}}</span>
+                                <span class="price-old">¥{{item.oldPrice}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <!-- 秒杀下面的图片 -->
-        <div class="recommend-image-box">
-            <img v-lazy="miaoshaImage.url">
-        </div>
-        <!-- 小米众筹 -->
-        <div class="recommend-zhonchou">
-            <div class="title">
-                <h2>小米众筹</h2>
-                <div class="more">
-                    <span>更多</span>
-                    <van-icon name="arrow" />
+            <!-- 秒杀下面的图片 -->
+            <div class="recommend-image-box">
+                <img v-lazy="miaoshaImage.url" />
+            </div>
+            <!-- 小米众筹 -->
+            <div class="recommend-zhonchou">
+                <div class="title">
+                    <h2>小米众筹</h2>
+                    <div class="more">
+                        <span>更多</span>
+                        <van-icon name="arrow" />
+                    </div>
                 </div>
             </div>
         </div>
@@ -102,7 +104,7 @@ export default {
                 // 轮播图
                 images: [],
                 // 分类 card
-                classifyCard: [],
+                classifyCard: []
             },
             /** 传递 SlideShowBox 组件 */
             // 商城早报
@@ -127,8 +129,20 @@ export default {
         this.init();
     },
     mounted() {
+        this.scrollFn();
+        this.scroll();
     },
     methods: {
+        // better-scroll
+        scrollFn() {
+            this.$nextTick(() => {
+                let getRef = this.$refs["recommendRef"]
+                this.scroll = new BScroll(getRef, {
+                    // 派发 click 事件；
+                    click: true
+                })
+            })
+        },
         // 初始化 调用接口
         init() {
             this.getTime_title();
@@ -145,7 +159,7 @@ export default {
                 // 秒杀商品
                 this.miaoshaStore = data.miaosha;
                 // 秒杀下面的图片
-                this.miaoshaImage = data.miaoshaImage
+                this.miaoshaImage = data.miaoshaImage;
             });
         },
         // 点场 title
@@ -202,17 +216,17 @@ export default {
             this.$nextTick(() => {
                 const options = {
                     scrollX: true
-                }
-                this.scroll = new BScroll(this.$refs.storeRef, options)
-            })
+                };
+                this.scroll = new BScroll(this.$refs.storeRef, options);
+            });
         },
         // 手指触摸到屏幕会触发
         touchstart() {
-            this.$emit("swipeableFun",false)
+            this.$emit("swipeableFun", false);
         },
         // 当手指离开屏幕时，会触发
         touchend() {
-            this.$emit("swipeableFun",true)
+            this.$emit("swipeableFun", true);
         }
     },
     watch: {}

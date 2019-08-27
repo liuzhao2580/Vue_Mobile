@@ -1,0 +1,67 @@
+@import "@/assets/css/base.scss";
+.goodsDetail {
+    .goodsDetail-box {
+        // 头部的按钮
+        .goodsDetail-header {
+            padding: 0 10px;
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            .back-btn {
+                background-color: $Color_939393;
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+                text-align: center;
+                line-height: 50px;
+                .iconfont {
+                    font-size: $FontSize25;
+                    color: $Color_fff;
+                }
+            }
+            .more-btn {
+                display: flex;
+                .share,
+                .more {
+                    background-color: $Color_939393;
+                    border-radius: 50%;
+                    width: 50px;
+                    height: 50px;
+                    text-align: center;
+                    line-height: 50px;
+                    .iconfont {
+                        font-size: $FontSize40;
+                        color: $Color_fff;
+                    }
+                }
+                .more {
+                    margin-left: 20px;
+                }
+            }
+        }
+        // 商品图片介绍
+        .goodsDetail-imgIntroduce {
+            height: 600px;
+            width: 100%;
+            .van-swipe {
+                height: 100%;
+                img {
+                    height: 100%;
+                    width: 100%;
+                }
+                .custom-indicator {
+                    position: absolute;
+                    right: 10px;
+                    bottom: 10px;
+                    width: 60px;
+                    height: 40px;
+                    text-align: center;
+                    line-height: 40px;
+                    background-color: $Color_939393;
+                    color: $Color_fff;
+                    border-radius: 15px;
+                }
+            }
+        }
+    }
+}

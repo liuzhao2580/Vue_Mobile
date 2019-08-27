@@ -19,7 +19,7 @@
                 width: 100%;
                 height: 60px;
                 margin-right: 100px;
-                z-index: 9999;
+                z-index: 1000;
 
                 .van-tabs__nav {
                     border: 0;
@@ -58,7 +58,7 @@
 
         // 按钮
         .tabOpen {
-            z-index: 99999;
+            z-index: 1001;
             position: absolute;
             right: 0;
             top: 0;
@@ -81,7 +81,7 @@
 
         // 隐藏的盒子 
         .tabAllCard-box {
-            z-index: 9999;
+            z-index: 1000;
             position: absolute;
             top: 10px;
             background-color: $Color_fff;
@@ -124,7 +124,7 @@
 
             // 遮盖层
             .Overlay-box {
-                z-index: 99999;
+                z-index: 1000;
                 position: fixed;
                 height: 100%;
                 width: 100%;
