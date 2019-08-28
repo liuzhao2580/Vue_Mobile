@@ -1,6 +1,6 @@
 <template>
-    <div class="recommend" style="height: 100%" ref="recommendRef">
-        <div class="recommend-box">
+    <ScrollModule :pulldown="true" @ScrollModuleFncPulldown="ScrollModuleFnc" :pullSuccess="pullSuccess">
+        <div class="recommend-box" slot="content">
             <!-- SlideShowBox 包含轮播图 和 分类  -->
             <SlideShowBox :SlideShowBox="SlideShowBox_Tran"></SlideShowBox>
             <!-- 商城早报 -->
@@ -51,18 +51,24 @@
                         </div>
                     </div>
                 </div>
-                <div class="store" ref="storeRef" @touchstart="touchstart" @touchend="touchend">
-                    <div class="store-content">
-                        <div v-for="(item,index) in miaoshaStore" :key="index" class="store-box">
-                            <div class="item-img">
-                                <img v-lazy="item.url" />
-                            </div>
-                            <div class="item-price">
-                                <span class="price-new">¥{{item.nowPrice}}</span>
-                                <span class="price-old">¥{{item.oldPrice}}</span>
+                <div @touchstart="touchstart" @touchend="touchend">
+                    <ScrollModule class="store" :scrollX="true">
+                        <div class="store-content" slot="content">
+                            <div
+                                v-for="(item,index) in miaoshaStore"
+                                :key="index"
+                                class="store-box"
+                            >
+                                <div class="item-img">
+                                    <img v-lazy="item.url" />
+                                </div>
+                                <div class="item-price">
+                                    <span class="price-new">¥{{item.nowPrice}}</span>
+                                    <span class="price-old">¥{{item.oldPrice}}</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </ScrollModule>
                 </div>
             </div>
             <!-- 秒杀下面的图片 -->
@@ -80,11 +86,10 @@
                 </div>
             </div>
         </div>
-    </div>
+    </ScrollModule>
 </template>
 
 <script>
-import BScroll from "better-scroll";
 import "./recommend.scss";
 import Vue from "vue";
 import { Lazyload } from "vant";
@@ -94,7 +99,8 @@ export default {
     name: "recommend",
     components: {
         // 引入 SlideShowBox 组件
-        SlideShowBox: () => import("@/components/SlideShowBox/SlideShowBox")
+        SlideShowBox: () => import("@/components/SlideShowBox/SlideShowBox"),
+        ScrollModule: () => import("@/components/ScrollModule/ScrollModule")
     },
     props: {},
     data() {
@@ -121,28 +127,18 @@ export default {
             // 商品
             miaoshaStore: [],
             // 秒杀下面的图片
-            miaoshaImage: []
+            miaoshaImage: [],
             /** 秒杀 */
+
+            /** ScrollModule 组件 */
+            pullSuccess : false
+            /** ScrollModule 组件 */
         };
     },
     created() {
         this.init();
     },
-    mounted() {
-        this.scrollFn();
-        this.scroll();
-    },
     methods: {
-        // better-scroll
-        scrollFn() {
-            this.$nextTick(() => {
-                let getRef = this.$refs["recommendRef"]
-                this.scroll = new BScroll(getRef, {
-                    // 派发 click 事件；
-                    click: true
-                })
-            })
-        },
         // 初始化 调用接口
         init() {
             this.getTime_title();
@@ -212,14 +208,6 @@ export default {
                 );
             }, 1000);
         },
-        scroll() {
-            this.$nextTick(() => {
-                const options = {
-                    scrollX: true
-                };
-                this.scroll = new BScroll(this.$refs.storeRef, options);
-            });
-        },
         // 手指触摸到屏幕会触发
         touchstart() {
             this.$emit("swipeableFun", false);
@@ -227,6 +215,12 @@ export default {
         // 当手指离开屏幕时，会触发
         touchend() {
             this.$emit("swipeableFun", true);
+        },
+        // 下拉刷新
+        ScrollModuleFnc() {
+            setTimeout(() => {
+                this.init()
+            }, 2000);
         }
     },
     watch: {}

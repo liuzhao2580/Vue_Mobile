@@ -1,5 +1,5 @@
 import axios from "axios";
-
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 const Axios = axios.create({
     // 下面两个属性，用来设置，请求失败或者超时，自动重新请求的次数和间隙时间
     retry: 2, // 请求次数

@@ -1,6 +1,6 @@
 <template>
-    <div class="mobel" style="height: 100%" ref="mobel_Ref">
-        <div class="mobel-box">
+    <ScrollModule>
+        <div class="mobel-box" slot="content">
             <!-- SlideShowBox 包含轮播图 和 分类  -->
             <SlideShowBox :SlideShowBox="SlideShowBox_Tran"></SlideShowBox>
             <!-- 推荐商品 -->
@@ -61,18 +61,19 @@
                 </ul>
             </div>
         </div>
-    </div>
+    </ScrollModule>
 </template>
 
 <script>
 import("./mobel.scss");
-import BScroll from "better-scroll";
 import { mobel_sildershow } from "@/api/home";
 export default {
     name: "mobel",
     components: {
         // 引入 SlideShowBox 组件
-        SlideShowBox: () => import("@/components/SlideShowBox/SlideShowBox")
+        SlideShowBox: () => import("@/components/SlideShowBox/SlideShowBox"),
+        // 引入 better-scroll 组件
+        ScrollModule: () => import("@/components/ScrollModule/ScrollModule"),
     },
     props: {},
     data() {
@@ -94,20 +95,7 @@ export default {
     created() {
         this.init();
     },
-    mounted() {
-        this.scrollModule()
-    },
     methods: {
-        // 初始化 scoll 插件
-        scrollModule() {
-            this.$nextTick(() => {
-                let getRef = this.$refs["mobel_Ref"]
-                this.scroll = new BScroll(getRef, {
-                    // 派发 click 事件；
-                    click: true
-                })
-            })
-        },
         // 初始化
         init() {
             mobel_sildershow().then(({ data }) => {
@@ -124,8 +112,7 @@ export default {
         },
         // 点击商品
         goods_detail(detail) {
-            console.log(detail);
-            this.$router.push({ path: "/goodsDetail" });
+            this.$router.push({ path: "/goodsDetail",query: {id:detail.id} });
         }
     },
     watch: {}
