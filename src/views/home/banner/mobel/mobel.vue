@@ -1,5 +1,5 @@
 <template>
-    <ScrollModule>
+    <ScrollModule :pulldown="true" @ScrollModuleFncPulldown="ScrollModuleFnc" :data="TranData" :listenScroll="true">
         <div class="mobel-box" slot="content">
             <!-- SlideShowBox 包含轮播图 和 分类  -->
             <SlideShowBox :SlideShowBox="SlideShowBox_Tran"></SlideShowBox>
@@ -89,7 +89,12 @@ export default {
             // 推荐商品
             mobelRecommend: {},
             // 商品
-            mobelGoods: []
+            mobelGoods: [],
+
+            /** ScrollModule 组件 */
+            getDataFlag: false, // 下拉刷新的时候 判断字段 
+            TranData: "",  // 用于获取 数据
+            /** ScrollModule 组件 */
         };
     },
     created() {
@@ -108,11 +113,22 @@ export default {
                 this.mobelRecommend = data.recommend;
                 // 商品
                 this.mobelGoods = data.goods;
+                if (this.getDataFlag) {
+                    this.TranData = data
+                }
             });
         },
         // 点击商品
         goods_detail(detail) {
             this.$router.push({ path: "/goodsDetail",query: {id:detail.id} });
+        },
+        // 下拉刷新
+        ScrollModuleFnc() {
+            this.getDataFlag = true
+            setTimeout(() => {
+                this.init()
+            }, 1000);
+            console.log("下拉刷新")
         }
     },
     watch: {}

@@ -27,6 +27,19 @@
                     <div class="custom-indicator" slot="indicator">{{ current + 1 }}/{{currentLength}}</div>
                 </van-swipe>
             </div>
+            <!-- 商品介绍 -->
+            <div class="goodsDetail-textIntroduce">
+                <div class="textIntroduce-miaosha" v-if="miaosha">
+                    <div class="miaosha-price">
+                        <span>秒杀价</span>
+                        <i>¥</i>
+                        <span>{{miaosha.miaoshaprice}}</span>
+                    </div>
+                    <div class="miaosha-time">
+                        <CountDownTime :countDown_Time="miaosha.miaoshatime"></CountDownTime>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -39,7 +52,9 @@ import { Lazyload } from "vant";
 Vue.use(Lazyload);
 export default {
     name: "goodsDetail",
-    components: {},
+    components: {
+        CountDownTime: () => import("@/components/CountDownTime/CountDownTime")
+    },
     props: {},
     data() {
         return {
@@ -48,6 +63,10 @@ export default {
             currentLength: 0,
             images: [],
             /** 轮播图 */
+
+            /** 商品介绍 */
+            miaosha: ""
+            /** 商品介绍 */
         };
     },
     created() {
@@ -65,6 +84,7 @@ export default {
                 console.log(data)
                 this.images = data.goods.img
                 this.currentLength = data.goods.img.length
+                this.miaosha = data.goods.miaosha
             })
         },
         // 轮播图滑动事件

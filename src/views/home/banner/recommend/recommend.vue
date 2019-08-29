@@ -1,5 +1,5 @@
 <template>
-    <ScrollModule :pulldown="true" @ScrollModuleFncPulldown="ScrollModuleFnc" :pullSuccess="pullSuccess">
+    <ScrollModule :pulldown="true" @ScrollModuleFncPulldown="ScrollModuleFnc" :data="TranData" :listenScroll="true">
         <div class="recommend-box" slot="content">
             <!-- SlideShowBox 包含轮播图 和 分类  -->
             <SlideShowBox :SlideShowBox="SlideShowBox_Tran"></SlideShowBox>
@@ -130,8 +130,10 @@ export default {
             miaoshaImage: [],
             /** 秒杀 */
 
+            
             /** ScrollModule 组件 */
-            pullSuccess : false
+            getDataFlag: false, // 下拉刷新的时候 判断字段 
+            TranData: "",  // 用于获取 数据
             /** ScrollModule 组件 */
         };
     },
@@ -156,6 +158,9 @@ export default {
                 this.miaoshaStore = data.miaosha;
                 // 秒杀下面的图片
                 this.miaoshaImage = data.miaoshaImage;
+                if (this.getDataFlag) {
+                    this.TranData = data
+                }
             });
         },
         // 点场 title
@@ -218,9 +223,11 @@ export default {
         },
         // 下拉刷新
         ScrollModuleFnc() {
+            this.getDataFlag = true
             setTimeout(() => {
                 this.init()
-            }, 2000);
+            }, 1000);
+            console.log("下拉刷新")
         }
     },
     watch: {}

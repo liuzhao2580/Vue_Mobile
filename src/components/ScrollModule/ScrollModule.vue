@@ -1,14 +1,15 @@
 <template>
     <div class="ScrollModule" ref="ScrollModule">
         <slot name="content"></slot>
-        <!-- <div class="ScrollModule_pulldown">
+        <div class="ScrollModule_pulldown">
             <slot name="pulldown">
                 <div class="pulldown-wrapper">
                     <div class="before-trigger" v-show="pullDown_show">{{ pullDownText }}</div>
+                    <div class="before-trigger" v-show="pullDown_Loading">加载中...</div>
                 </div>
             </slot>
             <div class="ScrollModule_pullSuccess" v-show="pullSuccessShow">刷新成功</div>
-        </div> -->
+        </div>
     </div>
 </template>
 
@@ -71,7 +72,7 @@ export default {
         // 列表数据
         data: {
             default: null
-        },
+        }
     },
     data() {
         return {
@@ -80,11 +81,11 @@ export default {
             pullDownText: "下拉刷新",
             pullSuccessShow: false,
             // 下拉刷新
-            pullDown_show: false
+            pullDown_show: false,
+            pullDown_Loading: false, // 加载中
         };
     },
-    created() {
-    },
+    created() {},
     mounted() {
         this.scrollModule();
     },
@@ -99,19 +100,29 @@ export default {
                         // 派发 click 事件；
                         click: this.click,
                         swipeBounceTime: this.swipeBounceTime,
-                        scrollX: this.scrollX
+                        scrollX: this.scrollX,
+                        // startY: -100,
+                        // 这个配置用于做下拉刷新功能，默认为 false。当设置为 true 或者是一个 Object 的时候，可以开启下拉刷新
+                        pullDownRefresh: this.pulldown
+                            ? { threshold: 50, stop: 50 }
+                            : false
                     });
                     // 是否派发滚动事件
                     if (this.listenScroll) {
-                        this.scroll.on("scroll", pos => {
-                            this.pullDown_show = true
-                            // if (pos.y < 50 ) {
-                            //     this.pullDownText = "下拉刷新"
-                            // }
-                            // if (pos.y > 50) {
-                            //     this.pullDownText = "释放即可刷新"
-                            // }
-                        });
+                        // this.scroll.on("scroll", pos => {
+                        //     if (pos.y > 50) {
+                        //         this.pullDownText = "释放即可刷新"
+                        //     }
+                        // });
+                        // this.scroll.on("scrollStart", (pos) => {
+                        //     // 显示 下拉刷新 字样
+                        //     this.pullDown_show = true;
+                        //     this.pullDownText = "下拉刷新"
+                        // });
+                        // this.scroll.on("scrollEnd", (pos) => {
+                        //     // 隐藏 加载中
+                        //     this.pullDown_Loading = false;
+                        // });
                     }
                     // 是否派发滚动到底部事件，用于上拉加载
                     if (this.pullup) {
@@ -123,11 +134,19 @@ export default {
                     }
                     // 是否派发顶部下拉事件，用于下拉刷新
                     if (this.pulldown) {
-                        this.scroll.on("touchEnd", pos => {
+                        this.scroll.on("touchEnd",(pos) => {
+                            if (pos.y > 50) {
+                                this.pullDown_show = true;
+                                this.pullDownText = "数据刷新中"
+                            }
+                        })
+                        // 在一次下拉刷新的动作后
+                        this.scroll.on("pullingDown", () => {
                             // 下拉动作
-                            // if (pos.y > 50) {
-                            //     // this.$emit("ScrollModuleFncPulldown")
-                            // }
+                            this.$emit("ScrollModuleFncPulldown");
+                            // 显示 加载中 字样  隐藏 释放即可刷新 字样
+                            // this.pullDown_Loading = true;
+                            // this.pullDown_show = false;
                         });
                     }
                     // 是否派发列表滚动开始的事件
@@ -157,13 +176,23 @@ export default {
         },
         scrollToElement() {
             // 代理better-scroll的scrollToElement方法
-            this.scroll && this.scroll.scrollToElement.apply(this.scroll, arguments);
-        }
+            this.scroll &&
+                this.scroll.scrollToElement.apply(this.scroll, arguments);
+        },
     },
     watch: {
         data: {
             handler(val) {
-                console.log(val,"val")
+                this.pullDown_show = false;
+                // 当传递过来的数据存在 说明是下拉刷新事件触发完成, 调用方法, 让 下拉还原
+                this.scroll.finishPullDown()
+                // 重新计算 重新计算 better-scroll，当 DOM 结构发生变化的时候务必要调用确保滚动的效果正常
+                this.scroll.refresh();
+                // 显示 刷新成功 
+                this.pullSuccessShow = true
+                setTimeout(() => {
+                    this.pullSuccessShow = false
+                }, 2000);
             },
             deep: true
         }

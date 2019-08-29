@@ -1,0 +1,14 @@
+@import "@/assets/css/base.scss";
+.CountDownTime-box {
+    display: flex;
+    font-size: $FontSize25;
+    color: $Color_fff;
+    .countDown-title {
+        margin-right: 10px;
+    }
+    .countDown-time {
+        span {
+            margin: 0 5px;
+        }
+    }
+}

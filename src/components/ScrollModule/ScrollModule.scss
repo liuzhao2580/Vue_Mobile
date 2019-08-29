@@ -12,15 +12,27 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            .before-trigger {
+                font-size: $FontSize25;
+                color: $Color_939393;
+            }
         }
         // 刷新成功
         .ScrollModule_pullSuccess {
-            position: fixed;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translateX(-50%);
+            background-color: $Color_EA625B;
             bottom: 50px;
             height: 50px;
             line-height: 50px;
-            width: 100%;
+            width: 200px;
             text-align: center;
+            font-size: $FontSize25;
+            color: $Color_fff;
+            border-radius: 10px;
+            opacity: 0.8;
         }
     }
     
