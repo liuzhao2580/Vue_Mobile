@@ -92,5 +92,29 @@
                 }
             }
         }
+        // 加入购物车
+        .goodsDetail-shopcar {
+            padding-top: 10px;
+            border-top: 1px solid $Color_ccc;
+            .van-icon {
+                font-size: $FontSize45;
+                .van-info {
+                    font-size: $FontSize30;
+                    height: 30px;
+                    line-height: 30px;
+                    min-width: 50px;
+                }
+            }
+            .van-button__text {
+                font-size: $FontSize30;
+            }
+            .van-goods-action-button {
+                height: 80px;
+            }
+            .van-goods-action-icon {
+                min-width: 160px;
+                font-size: $FontSize30;
+            }
+        }
     }
 }

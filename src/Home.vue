@@ -8,7 +8,8 @@
                 <li v-for="item in bottomNavData" :key="item.name" class="bottomNav-li">
                     <router-link :to="item.path">
                         <div class="imgBox">
-                            <i :class="item.icon"></i>
+                            <van-icon v-if="item.name == '购物车'" name="shopping-cart-o" :info="gettersShopNum" />
+                            <i v-else :class="item.icon"></i>
                         </div>
                         <span>{{item.name}}</span>
                     </router-link>
@@ -19,6 +20,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
     name: "Home",
     components: {},
@@ -46,8 +48,11 @@ export default {
                     name: "我的",
                     path: "/mine"
                 }
-            ]
+            ],
         };
+    },
+    computed: {
+        ...mapGetters(["gettersShopNum"])
     },
     created() {},
     mounted() {},
@@ -81,6 +86,12 @@ export default {
                     color: $Color_red;
                 }
             }
+        }
+        .van-info {
+            font-size: $FontSize30;
+            height: 30px;
+            line-height: 30px;
+            min-width: 50px;
         }
     }
 }

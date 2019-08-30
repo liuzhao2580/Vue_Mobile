@@ -7,7 +7,9 @@ export default new Vuex.Store({
     state: {
         searchHis: localStorage.getItem("searchHis") ? localStorage.getItem("searchHis").split(",") : [],
         // 是否展示搜索记录
-        showHis: true
+        showHis: true,
+        // 购物车的数量显示
+        stateShopNum: parseInt(localStorage.getItem("shopNum")) ? parseInt(localStorage.getItem("shopNum")) : ""
     },
     mutations: {
         // 存入搜索历史纪录
@@ -32,12 +34,20 @@ export default new Vuex.Store({
             if (state.searchHis.length == 0) {
                 state.showHis = false
             }
+        },
+        // 存入购物车
+        setShopNum(state, setItemShopNum) {
+            localStorage.setItem("shopNum", setItemShopNum)
+            state.stateShopNum = parseInt(localStorage.getItem("shopNum"))
         }
     },
     actions: {
         //自定义触发mutations里函数的方法，context与store 实例具有相同方法和属性
         actionsIsGetItem(context) {
             context.commit("isGetItem")
+        },
+        actionsGetShopNum(context, setItemShopNum) {
+            context.commit("setShopNum", setItemShopNum)
         }
     },
     getters: {
@@ -47,6 +57,8 @@ export default new Vuex.Store({
         // 是否展示搜索记录
         gettersShowHis(state) {
             return state.showHis
-        }
+        },
+        // 展示 加入购物车的数量
+        gettersShopNum: state => state.stateShopNum
     }
 })

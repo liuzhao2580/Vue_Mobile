@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import ("./shop.scss")
 export default {
   name:"shop",
   components: {},
@@ -22,7 +23,3 @@ export default {
   watch: {},
 };
 </script>
-
-<style lang="scss" scoped>
-
-</style>

@@ -75,7 +75,6 @@ export default {
             this.getHisData = this.$store.getters.gettersSearchHis
             // 数据获取
             getDetail().then(({data}) => {
-                console.log(data,"data")
                 this.TagData = data.data.hotSearch.tabs
                 this.classifyTagData = data.data.classify
             })

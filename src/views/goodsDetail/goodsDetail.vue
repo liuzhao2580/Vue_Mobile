@@ -40,6 +40,12 @@
                     </div>
                 </div>
             </div>
+            <!-- 加入购物车按钮 -->
+            <van-goods-action class="goodsDetail-shopcar">
+                <van-goods-action-icon icon="chat-o" text="客服"/>
+                <van-goods-action-icon icon="cart-o" text="购物车" :info="shopInfo" @click="shopcar"/>
+                <van-goods-action-button type="warning" :text="miaosha ? '立即抢购' : '加入购物车' " @click="shopcar_Click"/>
+            </van-goods-action>
         </div>
     </div>
 </template>
@@ -65,9 +71,19 @@ export default {
             /** 轮播图 */
 
             /** 商品介绍 */
-            miaosha: ""
+            miaosha: "",
             /** 商品介绍 */
+
+            /** 加入购物车 */
+            getShopInfo: this.$store.getters.gettersShopNum ? this.$store.getters.gettersShopNum : 0
+            /** 加入购物车 */
         };
+    },
+    computed: {
+        // 购物车上的数字显示
+        shopInfo (){
+            return this.getShopInfo ? this.getShopInfo : ""
+        },
     },
     created() {
         this.init()
@@ -90,6 +106,15 @@ export default {
         // 轮播图滑动事件
         onChange(index) {
             this.current = index;
+        },
+        // 点击加入购物车
+        shopcar_Click() {
+            this.getShopInfo += 1
+            this.$store.dispatch("actionsGetShopNum", this.getShopInfo)
+        },
+        // 点击购物车
+        shopcar() {
+            this.$router.push({path: "/shopcar"})
         }
     },
     watch: {}
