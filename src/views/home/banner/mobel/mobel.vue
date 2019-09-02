@@ -1,5 +1,5 @@
 <template>
-    <ScrollModule :pulldown="true" @ScrollModuleFncPulldown="ScrollModuleFnc" :data="TranData" :listenScroll="true">
+    <ScrollModule :pulldown="true" @ScrollModuleFncPulldown="ScrollModuleFnc" :data="TranData" :listenScroll="true" :pullup="true" @ScrollModuleFncPullup="ScrollModuleFncPullup">
         <div class="mobel-box" slot="content">
             <!-- SlideShowBox 包含轮播图 和 分类  -->
             <SlideShowBox :SlideShowBox="SlideShowBox_Tran"></SlideShowBox>
@@ -129,6 +129,10 @@ export default {
                 this.init()
             }, 1000);
             console.log("下拉刷新")
+        },
+        // 上拉加载
+        ScrollModuleFncPullup() {
+            console.log("上拉加载")
         }
     },
     watch: {}

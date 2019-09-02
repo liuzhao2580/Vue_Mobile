@@ -105,7 +105,9 @@ export default {
                         // 这个配置用于做下拉刷新功能，默认为 false。当设置为 true 或者是一个 Object 的时候，可以开启下拉刷新
                         pullDownRefresh: this.pulldown
                             ? { threshold: 50, stop: 50 }
-                            : false
+                            : false,
+                        pullUpLoad: this.pullup 
+                        ? {threshold: 50} : false
                     });
                     // 是否派发滚动事件
                     if (this.listenScroll) {
@@ -127,8 +129,8 @@ export default {
                     // 是否派发滚动到底部事件，用于上拉加载
                     if (this.pullup) {
                         this.scroll.on("scrollEnd", () => {
-                            if (this.scroll.y <= this.scroll.maxScrollY + 50) {
-                                // this.$emit("scrollToEnd");
+                            if (this.scroll.y <= (this.scroll.maxScrollY + 50)) {
+                                this.$emit("ScrollModuleFncPullup");
                             }
                         });
                     }
