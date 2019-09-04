@@ -29,6 +29,7 @@
             </div>
             <!-- 商品介绍 -->
             <div class="goodsDetail-textIntroduce">
+                <!-- 当存在 秒杀的时候 -->
                 <div class="textIntroduce-miaosha" v-if="miaosha">
                     <div class="miaosha-price">
                         <span>秒杀价</span>
@@ -37,6 +38,27 @@
                     </div>
                     <div class="miaosha-time">
                         <CountDownTime :countDown_Time="miaosha.miaoshatime"></CountDownTime>
+                    </div>
+                </div>
+                <!-- 详情文字介绍 -->
+                <div class="textIntroduce-text">
+                    <!-- 标题 -->
+                    <div class="text-title">{{goods.moeblName}}</div>
+                    <!-- 文字 -->
+                    <div class="text-box">
+                        <span class="texttitle">{{goods.texttitle}}</span>
+                        <span class="textcontent">{{goods.textcontent}}</span>
+                    </div>
+                    <!-- 价格 -->
+                    <div class="price-box">
+                        <span class="new-price">
+                            <i>¥</i>
+                            {{goods.newprice}}
+                        </span>
+                        <span class="old-price">
+                            <i>¥</i>
+                            {{goods.oldprice}}
+                        </span>
                     </div>
                 </div>
             </div>
@@ -51,7 +73,7 @@
 </template>
 
 <script>
-import ("./goodsDetail.scss");
+import ("./goodsDetail.scss")
 import { detail_post } from "@/api/home";
 import Vue from "vue";
 import { Lazyload } from "vant";
@@ -72,6 +94,7 @@ export default {
 
             /** 商品介绍 */
             miaosha: "",
+            goods: "",
             /** 商品介绍 */
 
             /** 加入购物车 */
@@ -101,6 +124,7 @@ export default {
                 this.images = data.goods.img
                 this.currentLength = data.goods.img.length
                 this.miaosha = data.goods.miaosha
+                this.goods = data.goods
             })
         },
         // 轮播图滑动事件
@@ -120,3 +144,7 @@ export default {
     watch: {}
 };
 </script>
+
+<style lang="scss" scoped>
+@import "./goodsDetail.scss";
+</style>

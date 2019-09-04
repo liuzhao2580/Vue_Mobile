@@ -72,6 +72,7 @@
         }
         // 商品介绍
         .goodsDetail-textIntroduce {
+            // 当存在 秒杀的时候 
             .textIntroduce-miaosha {
                 background-color: $Color_F25C2C;
                 width: 100%;
@@ -88,6 +89,30 @@
                         font-size: $FontSize20;
                         margin-left: 10px;
                         vertical-align: top;
+                    }
+                }
+            }
+            // 详情文字介绍
+            .textIntroduce-text {
+                padding: 0 20px;
+                margin-top: 20px;
+                .text-title {
+                    margin-bottom: 20px;
+                    font-weight: 500;
+                    color: #000;
+                }
+                .text-box {
+                    line-height: 40px;
+                    height: 150px;
+                    overflow-y: hidden;
+                    text-overflow:ellipsis;
+                    .texttitle {
+                        color: $Color_F25C2C;
+                        font-size: 30px;
+                    }
+                    .textcontent {
+                        font-size: 25px;
+
                     }
                 }
             }
