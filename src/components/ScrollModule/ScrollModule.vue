@@ -1,7 +1,7 @@
 <template>
     <div class="ScrollModule" ref="ScrollModule">
         <slot name="content"></slot>
-        <div class="ScrollModule_pulldown">
+        <div class="ScrollModule_pulldown" v-if="pulldown">
             <slot name="pulldown">
                 <div class="pulldown-wrapper">
                     <div class="before-trigger" v-show="pullDown_show">{{ pullDownText }}</div>
@@ -101,6 +101,7 @@ export default {
                         click: this.click,
                         swipeBounceTime: this.swipeBounceTime,
                         scrollX: this.scrollX,
+                        bounce: this.scrollX ? false: true,
                         // startY: -100,
                         // 这个配置用于做下拉刷新功能，默认为 false。当设置为 true 或者是一个 Object 的时候，可以开启下拉刷新
                         pullDownRefresh: this.pulldown

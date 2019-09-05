@@ -1,1 +1,12 @@
 @import "@/assets/css/base.scss";
+.div-box {
+    height: 800px;
+    overflow: hidden;
+    .ul_item {
+        width: 100%;
+
+        .li_item {
+            height: 150px;
+        }
+    }
+}
