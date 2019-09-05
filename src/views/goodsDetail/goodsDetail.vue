@@ -88,6 +88,45 @@
                     <span class="content">小米分期&nbsp;/&nbsp;花呗分期</span>
                     <van-icon name="arrow" class="icon"/>
                 </div>
+                <!-- 以旧换新 -->
+                <div class="trade-in">
+                    <img src="https://gitee.com/liuzhao2580/Vue-Mobile/raw/master/src/assets/images/mobel/goods/20190905155136_03.png" lazy-load>
+                </div>
+                <!-- 基本信息 商品规则 收货地址 三包凭证 -->
+                <div class="base-infomation">
+                    <!-- 商品规则 -->
+                    <div class="goods-base">
+                        <span class="title">已选</span>
+                        <span class="content">{{goods.moeblName}}&nbsp;3GB+32GB&nbsp;亮黑色&nbsp;x1</span>
+                        <van-icon name="arrow" class="icon"/>
+                    </div>
+                    <!-- 收货地址 -->
+                    <div class="goods-address">
+                        <span class="title">送至</span>
+                        <span class="content">武汉市&nbsp;江夏区&nbsp;
+                            <i class="isStore">有现货</i>
+                        </span>
+                        <van-icon name="arrow" class="icon"/>
+                    </div>
+                    <!-- 三包凭证 -->
+                    <div class="goods-certificate">
+                        <div class="content">
+                            <span class="content-span">
+                                <i class="iconfont icon-iconfontdui"></i>
+                                小米自营
+                            </span>
+                            <span class="content-span">
+                                <i class="iconfont icon-iconfontdui"></i>
+                                小米发货    
+                            </span>
+                            <span class="content-span">
+                                <i class="iconfont icon-iconfontdui"></i>
+                                七天无理由退货
+                            </span>
+                        </div>
+                        <van-icon name="arrow" class="icon"/>
+                    </div>
+                </div>
             </div>
             <!-- 点击 图片参数的弹出框 -->
             <van-popup v-model="imgParameter_popupShow" round position="bottom" :style="{ height: '70%' }" class="imgParameter_popupShowBox" :lazy-render="false">

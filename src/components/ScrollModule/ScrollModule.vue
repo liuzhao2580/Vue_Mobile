@@ -99,7 +99,7 @@ export default {
                         // probeType: this.probeType,
                         // 派发 click 事件；
                         click: this.click,
-                        swipeBounceTime: this.swipeBounceTime,
+                        // swipeBounceTime: this.swipeBounceTime,
                         scrollX: this.scrollX,
                         bounce: this.scrollX ? false: true,
                         // startY: -100,

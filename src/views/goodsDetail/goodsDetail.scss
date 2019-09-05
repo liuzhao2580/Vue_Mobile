@@ -254,6 +254,78 @@
                     font-size: $FontSize30;
                 }
             }
+
+            // 以旧换新
+            .trade-in {
+                width: 100%;
+                margin-top: 20px;
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            // 基本信息 商品规则 收货地址 三包凭证
+            .base-infomation {
+                margin-top: 20px;
+                width: 100%;
+                background-color: $Color_F5F5F5;
+                border-radius: 20px;
+                border: 1px solid $Color_DFDFDF;
+                // 商品规则
+                .goods-base,
+                .goods-address {
+                    width: 100%;
+                    height: 80px;
+                    line-height: 80px;
+                    padding: 0 30px;
+                    position: relative;
+                    border-bottom: 1px solid $Color_DFDFDF;
+                    .title {
+                        margin-right: 40px;
+                    }
+
+                    .content {
+                        color: $Color_262626;
+                        .isStore {
+                            color: $Color_F25C2C
+                        }
+                    }
+
+                    .icon {
+                        position: absolute;
+                        right: 40px;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        font-size: $FontSize30;
+                    }
+                }
+                // 收货地址
+                .goods-address {
+
+                }
+                // 三包凭证
+                .goods-certificate {
+                    height: 60px;
+                    line-height: 60px;
+                    padding: 0 30px;
+                    position: relative;
+                    .content {
+                        .content-span {
+                            .iconfont {
+                                font-size: $FontSize25;
+                                color: $Color_F25C2C
+                            }
+                        }
+                    }   
+                    .icon {
+                        position: absolute;
+                        right: 40px;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        font-size: $FontSize30;
+                    }
+                }
+            }
         }
     }
     // 加入购物车
