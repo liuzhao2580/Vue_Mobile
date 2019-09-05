@@ -96,6 +96,7 @@
             .textIntroduce-text {
                 padding: 0 20px;
                 margin-top: 20px;
+                width: 100%;
                 .text-title {
                     margin-bottom: 20px;
                     font-weight: 500;
@@ -103,16 +104,48 @@
                 }
                 .text-box {
                     line-height: 40px;
-                    height: 150px;
-                    overflow-y: hidden;
-                    text-overflow:ellipsis;
+                    position: relative;
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 4;
+                    overflow: hidden;
                     .texttitle {
                         color: $Color_F25C2C;
                         font-size: 30px;
                     }
                     .textcontent {
                         font-size: 25px;
-
+                    }
+                    .text-button {
+                        position: absolute;
+                        right: 0;
+                        bottom: 5px;
+                        border: 0;
+                        padding: 10px 20px;
+                        font-size: $FontSize20;
+                        background-color: #fff;
+                        color: $Color_F25C2C;
+                    }
+                }
+                // 价格
+                .price-box {
+                    margin-top: 20px;
+                    .new-price {
+                        font-size: $FontSize40;
+                        color: $Color_F25C2C;
+                        margin-right: 10px;
+                        i {
+                            font-size: $FontSize20;
+                            vertical-align: top;
+                        }
+                    }
+                    .old-price {
+                        font-size: $FontSize25;
+                        text-decoration: line-through;
+                        i {
+                            font-size: $FontSize20;
+                            vertical-align: text-top;
+                        }
                     }
                 }
             }
@@ -121,7 +154,7 @@
         .goodsDetail-shopcar {
             padding-top: 10px;
             border-top: 1px solid $Color_ccc;
-            .van-icon {
+            /deep/ .van-icon {
                 font-size: $FontSize45;
                 .van-info {
                     font-size: $FontSize30;
@@ -130,7 +163,7 @@
                     min-width: 50px;
                 }
             }
-            .van-button__text {
+            /deep/ .van-button__text {
                 font-size: $FontSize30;
             }
             .van-goods-action-button {

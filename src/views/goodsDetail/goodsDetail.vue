@@ -47,17 +47,18 @@
                     <!-- 文字 -->
                     <div class="text-box">
                         <span class="texttitle">{{goods.texttitle}}</span>
-                        <span class="textcontent">{{goods.textcontent}}</span>
+                        <span class="textcontent" ref="textcontent_ref">{{goods.textcontent}}</span>
+                        <button class="text-button" v-show="textButton" @click="textButton_Click($event)">全文</button>
                     </div>
                     <!-- 价格 -->
                     <div class="price-box">
                         <span class="new-price">
                             <i>¥</i>
-                            {{goods.newprice}}
+                            <span>{{goods.newprice}}</span>
                         </span>
-                        <span class="old-price">
+                        <span class="old-price" v-if="goods.oldprice">
                             <i>¥</i>
-                            {{goods.oldprice}}
+                            <span>{{goods.oldprice}}</span>
                         </span>
                     </div>
                 </div>
@@ -73,7 +74,7 @@
 </template>
 
 <script>
-import ("./goodsDetail.scss")
+// import ("./goodsDetail.scss")
 import { detail_post } from "@/api/home";
 import Vue from "vue";
 import { Lazyload } from "vant";
@@ -95,6 +96,7 @@ export default {
             /** 商品介绍 */
             miaosha: "",
             goods: "",
+            textButton: true,  // 显示全文按钮
             /** 商品介绍 */
 
             /** 加入购物车 */
@@ -111,7 +113,8 @@ export default {
     created() {
         this.init()
     },
-    mounted() {},
+    mounted() {
+    },
     methods: {
         // 初始化
         init() {
@@ -125,11 +128,29 @@ export default {
                 this.currentLength = data.goods.img.length
                 this.miaosha = data.goods.miaosha
                 this.goods = data.goods
+                this.getText_Height()
             })
         },
         // 轮播图滑动事件
         onChange(index) {
             this.current = index;
+        },
+        // 显示全文按钮
+        textButton_Click(e) {
+            let getEl = e.currentTarget;
+            this.textButton = false;
+            getEl.parentElement.style.overflow = "inherit"
+            getEl.parentElement.style.height = "100%"
+            getEl.parentElement.style.display = "inherit"
+        },
+        // 获取文字的高度
+        getText_Height() {
+            this.$nextTick(() => {
+                let getRef = this.$refs["textcontent_ref"]
+                if (getRef.offsetHeight < 300) {
+                    this.textButton = false;
+                }
+            })
         },
         // 点击加入购物车
         shopcar_Click() {
