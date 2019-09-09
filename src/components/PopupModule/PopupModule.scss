@@ -1,4 +1,17 @@
 @import "@/assets/css/base.scss";
 .PopupModule-box {
-
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    // 遮盖层
+    .PopupModule-coat {
+        background-color: $Color_939393;
+        opacity: 0.6;
+    }
+    // 内容
+    .PopupModule-content {
+        background-color: #fff;
+    }
 }

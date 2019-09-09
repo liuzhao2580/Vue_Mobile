@@ -21,7 +21,7 @@
             <!-- 商品图片 -->
             <div class="goodsDetail-imgIntroduce">
                 <van-swipe @change="onChange">
-                    <van-swipe-item v-for="(image, index) in images" :key="index">
+                    <van-swipe-item v-for="(image, index) in images" :key="index" @click="image_PreviewShow = true">
                         <img v-lazy="image" />
                     </van-swipe-item>
                     <div
@@ -29,6 +29,7 @@
                         slot="indicator"
                     >{{ current + 1 }}/{{currentLength}}</div>
                 </van-swipe>
+                <div class="head-introduce"></div>
             </div>
             <!-- 商品介绍 -->
             <div class="goodsDetail-textIntroduce">
@@ -72,18 +73,16 @@
             </div>
             <!-- 商品参数图片介绍 -->
             <div class="goodsDetail-imgParameter">
-                <ScrollModule :scrollX="true">
-                    <ul class="ul_item" slot="content" @click="ul_click">
-                        <li class="li_item" v-for="(item,index) in goods.imgParameter" :key="index">
-                            <img :src="item" />
-                        </li>
-                    </ul>
-                </ScrollModule>
+                <ul class="ul_item" slot="content" @click="ul_click">
+                    <li class="li_item" v-for="(item,index) in goods.imgParameter" :key="index">
+                        <img :src="item" />
+                    </li>
+                </ul>
             </div>
             <!-- 商品 属性 -->
             <div class="goodsDetail-attribute">
                 <!-- 分期 -->
-                <div class="installment">
+                <div class="installment" @click="installment_click">
                     <span class="title">分期</span>
                     <span class="content">小米分期&nbsp;/&nbsp;花呗分期</span>
                     <van-icon name="arrow" class="icon"/>
@@ -129,24 +128,55 @@
                 </div>
             </div>
             <!-- 点击 图片参数的弹出框 -->
-            <van-popup v-model="imgParameter_popupShow" round position="bottom" :style="{ height: '70%' }" class="imgParameter_popupShowBox" :lazy-render="false">
+            <van-popup v-model="imgParameter_popupShow" round position="bottom" :style="{ height: '70%' }" class="imgParameter_popupShowBox">
                 <!-- 关键参数 -->
                 <div class="keyParameter-box">
                     <div class="keyParameter-title">关键参数</div>
                     <div class="keyParameter-content">
-                        <ScrollModule>
-                            <ul class="ul_item" slot="content">
-                                <li class="li_item" v-for="item in 20" :key="item">
-                                    <span class="li_title">一路向北</span>
-                                    <span class="li_content">你转身向北,侧脸还是很美</span>
-                                </li>
-                            </ul>
-                        </ScrollModule>
+                        <ul class="ul_item" slot="content">
+                            <li class="li_item" v-for="item in 20" :key="item">
+                                <span class="li_title">一路向北</span>
+                                <span class="li_content">你转身向北,侧脸还是很美</span>
+                            </li>
+                        </ul>
                     </div>
+                    <van-button type="default" class="success_btn" @click="imgParameter_popupShow = false">完成</van-button>
                 </div>
-                <van-button type="default" class="success_btn" @click="imgParameter_popupShow = false">完成</van-button>
+            </van-popup>
+
+            <!-- 点击 分期 弹出框 -->
+            <van-popup v-model="installment_popupShow" round position="bottom" :style="{ height: '70%' }" class="installment_popupShowBox">
+                <div class="installment-box">
+                    <!-- 头部 商品基本信息 -->
+                    <div class="installment-head">
+                        <div @click="current = 0;image_PreviewShow = true" class="head-img">
+                            <img :src="images[0]" lazy-load>
+                        </div>
+                        <div class="head-introduce">
+                            <div class="introduce-price">
+                                <span class="newprice">
+                                    <i>¥</i>
+                                    <span>{{goods.newprice}}</span>
+                                </span>
+                                <span class="oldprice">
+                                    <i>¥</i>
+                                    <span>{{goods.oldprice}}</span>
+                                </span>
+                            </div>
+                            <div class="introduce-text"></div>
+                        </div>
+                    </div>
+                    <!-- 内容 分期信息 -->
+                    <div class="installment-body"></div>
+                    
+                </div>
+                <van-button type="default" class="success_btn" @click="installment_popupShow = false">立即抢购</van-button>
             </van-popup>
         </div>
+
+        <!-- 图片预览 -->
+        <van-image-preview  v-model="image_PreviewShow" :images="images" :showIndicators="true" :showIndex="false" :startPosition="current"/>
+        
         <!-- 加入购物车按钮 -->
         <van-goods-action class="goodsDetail-shopcar">
             <van-goods-action-icon icon="chat-o" text="客服" />
@@ -185,14 +215,15 @@ export default {
             miaosha: "",
             goods: "",
             textButton: true, // 显示全文按钮
-
             imgParameter_popupShow: false,// 点击 图片参数的弹出框
+            installment_popupShow: false, // 点击 分期的弹框
+            image_PreviewShow : false, // 图片预览
             /** 商品介绍 */
 
             /** 加入购物车 */
             getShopInfo: this.$store.getters.gettersShopNum
                 ? this.$store.getters.gettersShopNum
-                : 0
+                : 0,
             /** 加入购物车 */
         };
     },
@@ -245,6 +276,12 @@ export default {
         // 点击图片参数
         ul_click() {
             this.imgParameter_popupShow = true
+            this.pushState()
+        },
+        // 分期点击事件
+        installment_click() {
+            this.installment_popupShow = true
+            this.pushState()
         },
         // 点击加入购物车
         shopcar_Click() {
@@ -254,9 +291,26 @@ export default {
         // 点击购物车
         shopcar() {
             this.$router.push({ path: "/shopcar" });
-        }
+        },
+        // 初始化 用于处理用户点击物理返回按钮的事件
+        pushState() {
+            if (window.history && window.history.pushState) {
+                history.pushState(null, null, document.URL);
+                window.addEventListener("popstate", this.fun, false); //false阻止默认事件
+            }
+        },
+        // 用于处理用户点击物理返回按钮的事件
+        fun() {
+            if (this.imgParameter_popupShow) {
+                this.imgParameter_popupShow = false;
+            }
+        },
     },
-    watch: {}
+    watch: {},
+    destroyed() {
+        // 用于处理用户点击物理返回按钮的事件
+        window.removeEventListener("popstate", this.fun, false); //false阻止默认事件
+    }
 };
 </script>
 

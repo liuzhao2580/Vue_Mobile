@@ -1,9 +1,11 @@
 <template>
-    <div class="PopupModule-box">
+    <div class="PopupModule-box" v-show="showFlag">
         <!-- 遮盖层 -->
         <div class="PopupModule-coat" :style="{height : coatHeight}"></div>
         <!-- 内容 -->
-        <div class="PopupModule-content" :style="{height : contentHeight}"></div>
+        <div class="PopupModule-content" :style="{height : contentHeight}">
+            <slot></slot>
+        </div>
     </div>
 </template>
 
@@ -19,6 +21,11 @@ export default {
         // 内容高度
         contentHeight: {
             default: "70%"
+        },
+        // 显示flag
+        showFlag: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
@@ -27,7 +34,15 @@ export default {
     created() {},
     mounted() {},
     methods: {},
-    watch: {}
+    watch: {
+        showFlag: {
+            handler(val) {
+                console.log(val,"val")
+                this.showFlag = val
+            },
+            deep: true
+        }
+    }
 };
 </script>
 

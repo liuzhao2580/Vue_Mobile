@@ -25,3 +25,24 @@
 .clearfix {
     zoom: 1;
 }
+
+// 价格样式
+.newprice {
+    font-size: $FontSize40;
+    color: $Color_F25C2C;
+    margin-right: 10px;
+
+    i {
+        font-size: $FontSize20;
+        vertical-align: top;
+    }
+}
+.oldprice {
+    font-size: $FontSize25;
+    text-decoration: line-through;
+
+    i {
+        font-size: $FontSize20;
+        vertical-align: text-top;
+    }
+}
