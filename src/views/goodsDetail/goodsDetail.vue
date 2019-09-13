@@ -4,7 +4,7 @@
             <!-- 头部的按钮 -->
             <div class="goodsDetail-header">
                 <!-- 返回按钮 -->
-                <div class="back-btn" @click="$router.back()">
+                <div class="back-btn" @click="$router.push({path:'home'})">
                     <i class="iconfont icon-fanhui"></i>
                 </div>
                 <div class="more-btn">
@@ -264,6 +264,7 @@ export default {
             getEl.parentElement.style.height = "100%";
             getEl.parentElement.style.display = "inherit";
         },
+<<<<<<< HEAD
         // 获取文字的高度
         getText_Height() {
             this.$nextTick(() => {
@@ -273,6 +274,8 @@ export default {
                 }
             });
         },
+=======
+>>>>>>> '111'
         // 点击图片参数
         ul_click() {
             this.imgParameter_popupShow = true
